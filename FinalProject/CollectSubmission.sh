@@ -1,0 +1,11 @@
+#!/bin/bash
+
+usage(){
+    echo "Usage: $0 student-number"
+    exit 1
+}
+
+[[ $# -eq 0 ]] && usage
+
+tar czvf ${1}.tar.gz Part1 Part2 Part3 1pager.pdf
+
