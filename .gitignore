@@ -159,6 +159,6 @@ cython_debug/
 #.idea/
 
 # Data files
-data/
+Assignment1/data/
 *.pth
 *.tar.gz
