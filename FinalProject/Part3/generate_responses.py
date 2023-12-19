@@ -85,7 +85,11 @@ def main(args):
         
         inputs = tokenizer(modified_data, return_tensors="pt", padding='max_length', truncation=True).to(device)
 
-        if len(inputs['input_ids'][0]) > MAX_LEN: continue
+        if len(inputs['input_ids'][0]) > MAX_LEN:
+            inputs = tokenizer(data, return_tensors="pt", padding='max_length', truncation=True).to(device)
+        
+        if len(inputs['input_ids'][0]) > MAX_LEN:
+            continue
         
         reply_ids = model.generate(**inputs)
         reply_txts = tokenizer.batch_decode(reply_ids, skip_special_tokens=True)[0]
