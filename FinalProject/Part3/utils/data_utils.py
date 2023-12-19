@@ -1,6 +1,9 @@
 import torch
 import datasets
 
+def list_chunk(lst, n):
+    return [lst[i:i+n] for i in range(0, len(lst), n)]
+
 
 class ProsocialDialogDataset(torch.utils.data.Dataset):
     def __init__(self, turn, split='test'):
@@ -33,6 +36,10 @@ class ProsocialDialogDataset(torch.utils.data.Dataset):
             self.dialog = 
 
             '''
+
+            self.dialog = self.dataset[split]['context']
+            # self.dialog = list_chunk(self.dataset[split]['context'], 2)
+
         
         
     def __len__(self):
@@ -43,7 +50,7 @@ class ProsocialDialogDataset(torch.utils.data.Dataset):
         return self.dialog[idx]
         
 
-def load_dataset(dname='allenai/prosocial-dialog', turn='multi', split='test'):
+def load_dataset(dname='allenai/prosocial-dialog', turn='single', split='test'):
     if dname == 'allenai/prosocial-dialog':
         return ProsocialDialogDataset(turn, split)
     else:
