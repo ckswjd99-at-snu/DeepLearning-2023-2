@@ -27,6 +27,18 @@ class ProsocialDialogDataset(torch.utils.data.Dataset):
             self.dialog = 
             
             '''
+
+            context = self.dataset[split]['context']
+            response = self.dataset[split]['response']
+
+            if len(context) %2 != 0:
+                context = context[:-1]
+                response = response[:-1]
+
+            # get two pairs of context and response, then concatenate them
+            context = list_chunk(context, 2)
+            response = list_chunk(response, 2)
+            self.dialog = [f'{c[0]}</s>{r[0]}</s>{c[1]}' for c, r in zip(context, response)]
             
         elif turn == 'single':
             '''
@@ -38,7 +50,6 @@ class ProsocialDialogDataset(torch.utils.data.Dataset):
             '''
 
             self.dialog = self.dataset[split]['context']
-            # self.dialog = list_chunk(self.dataset[split]['context'], 2)
 
         
         
