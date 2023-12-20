@@ -4,7 +4,6 @@ import datasets
 def list_chunk(lst, n):
     return [lst[i:i+n] for i in range(0, len(lst), n)]
 
-
 class ProsocialDialogDataset(torch.utils.data.Dataset):
     def __init__(self, turn, split='test'):
         """
